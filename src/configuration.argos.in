@@ -6,7 +6,7 @@
   <!-- ************************* -->
   <framework>
     <system threads="0" />
-    <experiment length="0" ticks_per_second="10" random_seed="0" />
+    <experiment length="0" ticks_per_second="5" random_seed="0" />
   </framework>
   
   <!-- *************** -->
@@ -34,11 +34,24 @@
   <!-- * Arena configuration * -->
   <!-- *********************** -->
   <arena size="2, 1, 1" positional_index="grid" positional_grid_size="25,25,1">
+    <!--pipuck_ext id="pipuck_ext_2">
+      <body position="-0.5,0,0.1" orientation="0,0,90"/>
+      <controller config="test_controller"/>
+    </pipuck_ext-->
+    
+    <!--distribute>
+      <position method="grid" layout="15,15,1" center="-0.5,-0.04,0.2" distances="0.006,0.006,0.006" />
+      <orientation method="constant" values="0,0,0" />
+      <entity quantity="225" max_trials="225" base_num="2000">
+        <box id="b" size="0.005,0.005,0.005" movable="true" mass="0.001"/>
+      </entity>
+    </distribute-->
+    
     <pipuck_ext id="pipuck_ext_0">
       <body position="-0.5,0,0" orientation="0,0,0"/>
       <controller config="test_controller"/>
     </pipuck_ext>
-
+    
     <pipuck_ext id="pipuck_ext_1">
       <body position="0.5,0,0" orientation="180,0,0"/>
       <controller config="test_controller"/>
@@ -50,7 +63,7 @@
   <!-- * Physics engines * -->
   <!-- ******************* -->
   <physics_engines>
-    <dynamics3d id="dyn3d">
+    <dynamics3d id="dyn3d" iterations="20">
       <gravity g="9.8" />
       <floor />
     </dynamics3d>
