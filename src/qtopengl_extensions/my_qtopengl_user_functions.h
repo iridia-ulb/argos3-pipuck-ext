@@ -5,7 +5,6 @@ namespace argos {
    class CMyQtOpenGLUserFunctions;
    class CDebugEntity;
    class CPiPuckExtEntity;
-   class CDroneEntity;
    struct SAnchor;
    class QMouseWheelEventHandler;
 }
@@ -26,7 +25,6 @@ namespace argos {
 
       virtual void Init(TConfigurationNode& t_tree) {}
 
-      void Annotate(CDroneEntity& c_entity);
       void Annotate(CPiPuckExtEntity& c_entity);
       void Annotate(CDebugEntity& c_debug_entity, const SAnchor& s_anchor);
 

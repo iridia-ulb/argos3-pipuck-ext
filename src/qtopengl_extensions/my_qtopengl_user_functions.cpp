@@ -5,7 +5,6 @@
 #include <argos3/core/simulator/space/space.h>
 #include <argos3/core/simulator/entity/composable_entity.h>
 
-#include <argos3/plugins/robots/drone/simulator/drone_entity.h>
 #include "../extensions/pipuck_ext/pipuck_ext_entity.h"
 #include "../extensions/debug/debug_entity.h"
 
@@ -21,19 +20,6 @@ namespace argos {
 
    CMyQtOpenGLUserFunctions::CMyQtOpenGLUserFunctions() {
       RegisterUserFunction<CMyQtOpenGLUserFunctions, CPiPuckExtEntity>(&CMyQtOpenGLUserFunctions::Annotate);
-      RegisterUserFunction<CMyQtOpenGLUserFunctions, CDroneEntity>(&CMyQtOpenGLUserFunctions::Annotate);
-   }
-
-   /****************************************/
-   /****************************************/
-
-   void CMyQtOpenGLUserFunctions::Annotate(CDroneEntity& c_entity) {
-      try {
-         CDebugEntity& cDebugEntity =
-            c_entity.GetComponent<CDebugEntity>("debug");
-         Annotate(cDebugEntity, c_entity.GetEmbodiedEntity().GetOriginAnchor());
-      }
-      catch(CARGoSException& ex) {}
    }
 
    /****************************************/
