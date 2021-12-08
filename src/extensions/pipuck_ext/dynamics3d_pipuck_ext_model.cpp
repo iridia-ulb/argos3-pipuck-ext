@@ -227,7 +227,7 @@ namespace argos {
    const btQuaternion CDynamics3DPiPuckExtModel::BODY_TO_WHEEL_LEFT_JOINT_ROTATION(btVector3(1,0,0), SIMD_HALF_PI);
    
    const btVector3    CDynamics3DPiPuckExtModel::MOUNT_HALF_EXTENTS(0.1, 0.00835, 0.1);
-   const btScalar     CDynamics3DPiPuckExtModel::MOUNT_MASS(5.100);
+   const btScalar     CDynamics3DPiPuckExtModel::MOUNT_MASS(0.100);
    const btTransform  CDynamics3DPiPuckExtModel::MOUNT_OFFSET(
       btQuaternion(0.0, 0.0, 0.0, 1.0),
       btVector3(0.0, BODY_DISTANCE_FROM_FLOOR + 2.0 * BODY_HALF_EXTENTS.getY(), 0.0));
