@@ -13,14 +13,32 @@
   <!-- * Controllers * -->
   <!-- *************** -->
   <controllers>
-    <lua_controller id="test_controller">
+    <lua_controller id="pipuck_controller">
       <actuators>
         <pipuck_differential_drive implementation="default" />
         <pipuck_leds implementation="default" />
         <debug implementation="default" />
+        <radios implementation="default" />
       </actuators>
-      <sensors />
-      <params script="@CMAKE_BINARY_DIR@/controller.lua" />
+      <sensors>
+        <radios implementation="default" />
+      </sensors>
+      <params script="@CMAKE_BINARY_DIR@/pipuck_controller.lua" />
+    </lua_controller>
+
+    <lua_controller id="drone_controller">
+      <actuators>
+        <debug implementation="default" />
+        <drone_flight_system implementation="default" />
+        <radios implementation="default" />
+      </actuators>
+      <sensors>
+        <drone_system implementation="default" />
+        <drone_cameras_system implementation="default" show_frustum="false" show_tag_rays="true" />
+        <drone_flight_system implementation="default" />
+        <radios implementation="default" />
+      </sensors>
+      <params script="@CMAKE_BINARY_DIR@/drone_controller.lua" />
     </lua_controller>
   </controllers>
 
@@ -33,7 +51,7 @@
   <!-- *********************** -->
   <!-- * Arena configuration * -->
   <!-- *********************** -->
-  <arena size="2, 1, 1" positional_index="grid" positional_grid_size="25,25,1">
+  <arena size="2, 2, 3" positional_index="grid" positional_grid_size="25,25,1">
     <!--pipuck_ext id="pipuck_ext_2">
       <body position="-0.5,0,0.1" orientation="0,0,90"/>
       <controller config="test_controller"/>
@@ -47,15 +65,20 @@
       </entity>
     </distribute-->
     
-    <pipuck_ext id="pipuck_ext_0">
-      <body position="-0.5,0,0" orientation="0,0,0"/>
-      <controller config="test_controller"/>
+    <pipuck_ext id="pipuck_ext_0" wifi_medium="wifi" tag_medium="tags">
+      <body position="-0.3,0.5,0" orientation="0,0,0"/>
+      <controller config="pipuck_controller"/>
     </pipuck_ext>
     
-    <pipuck_ext id="pipuck_ext_1">
-      <body position="0.5,0,0" orientation="180,0,0"/>
-      <controller config="test_controller"/>
+    <pipuck_ext id="pipuck_ext_1" wifi_medium="wifi" tag_medium="tags">
+      <body position="0.3,0.5,0" orientation="180,0,0"/>
+      <controller config="pipuck_controller"/>
     </pipuck_ext>
+
+    <drone id="drone1" wifi_medium="wifi">
+      <body position="0,-0.75,0" orientation="0,0,0"/>
+      <controller config="drone_controller"/>
+    </drone>
   </arena>
 
 
@@ -63,6 +86,7 @@
   <!-- * Physics engines * -->
   <!-- ******************* -->
   <physics_engines>
+    <pointmass3d id="pm3d" iterations="10" />
     <dynamics3d id="dyn3d" iterations="20">
       <gravity g="9.8" />
       <floor />
@@ -72,7 +96,11 @@
   <!-- ********* -->
   <!-- * Media * -->
   <!-- ********* -->
-  <media />
+  <media>
+    <directional_led id="directional_leds" index="grid" grid_size="20,20,20"/>
+    <tag id="tags" index="grid" grid_size="20,20,20" />
+    <radio id="wifi" index="grid" grid_size="20,20,20" />
+  </media>
 
   <!-- ****************** -->
   <!-- * Visualization * -->

@@ -55,7 +55,12 @@ configure_file(
   ${CMAKE_BINARY_DIR}/configuration.argos)
 
 configure_file(
-  ${CMAKE_SOURCE_DIR}/controller.lua
-  ${CMAKE_BINARY_DIR}/controller.lua
+  ${CMAKE_SOURCE_DIR}/drone_controller.lua
+  ${CMAKE_BINARY_DIR}/drone_controller.lua
+  COPYONLY)
+
+configure_file(
+  ${CMAKE_SOURCE_DIR}/pipuck_controller.lua
+  ${CMAKE_BINARY_DIR}/pipuck_controller.lua
   COPYONLY)
 
