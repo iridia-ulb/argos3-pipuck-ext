@@ -5,6 +5,9 @@ namespace argos {
    class CMyQtOpenGLUserFunctions;
    class CDebugEntity;
    class CPiPuckExtEntity;
+   class CDroneEntity;
+   class CBuilderBotEntity;
+   class CBlockEntity;
    struct SAnchor;
    class QMouseWheelEventHandler;
 }
@@ -23,15 +26,38 @@ namespace argos {
 
       virtual ~CMyQtOpenGLUserFunctions() {}
 
-      virtual void Init(TConfigurationNode& t_tree) {}
+      virtual void Init(TConfigurationNode& t_tree);
 
+      virtual void EntityMoved(CEntity& c_entity,
+                               const CVector3& c_old_pos,
+                               const CVector3& c_new_pos);
+
+      void Annotate(CBlockEntity& c_entity);
+      void Annotate(CBuilderBotEntity& c_entity);
+      void Annotate(CDroneEntity& c_entity);
       void Annotate(CPiPuckExtEntity& c_entity);
       void Annotate(CDebugEntity& c_debug_entity, const SAnchor& s_anchor);
+
+   private:
+      QMouseWheelEventHandler* m_pcMouseWheelEventHandler;
 
    private:
       void DrawArrow3(const CVector3& c_from, const CVector3& c_to);
       void DrawRing3(const CVector3& c_center, Real f_radius);
 
+   };
+
+   class QMouseWheelEventHandler : public QObject {
+      Q_OBJECT
+   public:
+      QMouseWheelEventHandler(QObject* pc_parent,
+                              CMyQtOpenGLUserFunctions* pc_user_functions) :
+         QObject(pc_parent),
+         m_pcUserFunctions(pc_user_functions) {}
+   protected:
+      bool eventFilter(QObject* pc_object, QEvent* pc_event);
+   private:
+      CMyQtOpenGLUserFunctions* m_pcUserFunctions;
    };
 
    struct CCachedShapes {
