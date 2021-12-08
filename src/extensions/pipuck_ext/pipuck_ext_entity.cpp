@@ -141,6 +141,13 @@ namespace argos {
          AddComponent(*m_pcDirectionalLEDEquippedEntity);
          /* create and initialize the tags */
          m_pcTagEquippedEntity = new CTagEquippedEntity(this, "tags_0");
+         m_pcTagEquippedEntity->AddTag("tag_0",
+                                       TAG_OFFSET_POSITION,
+                                       CQuaternion(),
+                                       GetEmbodiedEntity().GetOriginAnchor(),
+                                       CRadians::PI_OVER_THREE,
+                                       TAG_SIDE_LENGTH,
+                                       GetId());
          std::string strTagMedium;
          GetNodeAttributeOrDefault(t_tree, "tag_medium", strTagMedium, strTagMedium);
          if(!strTagMedium.empty()) {
@@ -149,13 +156,6 @@ namespace argos {
             m_pcTagEquippedEntity->SetMedium(cTagMedium);
             m_pcTagEquippedEntity->Enable();
          }
-         m_pcTagEquippedEntity->AddTag("tag_0",
-                                       TAG_OFFSET_POSITION,
-                                       CQuaternion(),
-                                       GetEmbodiedEntity().GetOriginAnchor(),
-                                       CRadians::PI_OVER_THREE,
-                                       TAG_SIDE_LENGTH,
-                                       GetId());
          AddComponent(*m_pcTagEquippedEntity);
          /* Create and initialize the controllable entity */
          m_pcControllableEntity = new CControllableEntity(this);
