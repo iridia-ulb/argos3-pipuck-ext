@@ -2,23 +2,20 @@ function init()
    reset()
 end
 
-function step()
-   robot.debug.draw_arrow(vector3(0,0,0.125), vector3(0,0,0.250), 'red')
-   robot.debug.draw_ring(vector3(0,0,0), 0.125, 0, 0, 255) -- 0,0,255 (blue)
-   robot.debug.write('hello')
-   robot.debug.write('world')
-   robot.leds.set_ring_leds(false)
-   robot.leds.set_ring_led_index(count, true)
-   count = count + 1
-   if count > 8 then
-      count = 1
+function reset()
+   robot.flight_system.set_target_pose(vector3(0,0,1.5), 0)
+   for id, camera in pairs(robot.cameras_system) do
+      camera.enable()
    end
+   robot.leds.set_led_index(1, "red")
+   robot.leds.set_led_index(2, "blue")
+   robot.leds.set_led_index(3, "green")
+   robot.leds.set_led_index(4, "yellow")
 end
 
-function reset()
-   count = 1
-   robot.differential_drive.set_linear_velocity(0.05, 0.05)
+function step()
 end
 
 function destroy()
 end
+

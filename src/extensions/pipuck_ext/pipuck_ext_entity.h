@@ -6,7 +6,7 @@ namespace argos {
    class CControllableEntity;
    class CDirectionalLEDEquippedEntity;
    class CEmbodiedEntity;
-   class CRadioEquippedEntity;
+   class CSimpleRadioEquippedEntity;
    class CTagEquippedEntity;
 }
 
@@ -27,7 +27,7 @@ namespace argos {
          m_pcControllableEntity(nullptr),
          m_pcEmbodiedEntity(nullptr),
          m_pcDifferentialDriveEntity(nullptr),
-         m_pcRadioEquippedEntity(nullptr) {}
+         m_pcSimpleRadioEquippedEntity(nullptr) {}
 
       virtual ~CPiPuckExtEntity() {}
 
@@ -73,12 +73,12 @@ namespace argos {
          return *m_pcEmbodiedEntity;
       }
 
-      inline CRadioEquippedEntity& GetRadioEquippedEntity() {
-         return *m_pcRadioEquippedEntity;
+      inline CSimpleRadioEquippedEntity& GetSimpleRadioEquippedEntity() {
+         return *m_pcSimpleRadioEquippedEntity;
       }
 
-      inline const CRadioEquippedEntity& GetRadioEquippedEntity() const {
-         return *m_pcRadioEquippedEntity;
+      inline const CSimpleRadioEquippedEntity& GetSimpleRadioEquippedEntity() const {
+         return *m_pcSimpleRadioEquippedEntity;
       }
 
       virtual void UpdateComponents();
@@ -89,7 +89,7 @@ namespace argos {
       CDirectionalLEDEquippedEntity*  m_pcDirectionalLEDEquippedEntity;
       CEmbodiedEntity*                m_pcEmbodiedEntity;
       CPiPuckDifferentialDriveEntity* m_pcDifferentialDriveEntity;
-      CRadioEquippedEntity*           m_pcRadioEquippedEntity;
+      CSimpleRadioEquippedEntity*     m_pcSimpleRadioEquippedEntity;
       CTagEquippedEntity*             m_pcTagEquippedEntity;
 
       static const CVector3 WIFI_OFFSET_POSITION;
